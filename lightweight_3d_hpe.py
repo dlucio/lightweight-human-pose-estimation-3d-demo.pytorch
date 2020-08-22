@@ -60,10 +60,7 @@ def initialize(device="GPU", model="human-pose-estimation-3d.pth", height_size=2
     started = True
 
 
-
 def run(frame):
-    if not started:
-        initialize()
         
     global fx, net, base_height, mean_time, R, t, stride
 
@@ -87,7 +84,7 @@ def run(frame):
 
         poses_3d = poses_3d.reshape(poses_3d.shape[0], 19, -1)[:, :, 0:3]
 
-    frame = frame #np.zeros_like(frame)
+    # frame = np.zeros_like(frame)
     draw_poses(frame, poses_2d)
     current_time = (cv2.getTickCount() - current_time) / cv2.getTickFrequency()
     if mean_time == 0:
